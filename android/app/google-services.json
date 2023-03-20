@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1087243601746",
+    "project_id": "oyver-cd59b",
+    "storage_bucket": "oyver-cd59b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087243601746:android:fa51bb544a46ea0e62dc8b",
+        "android_client_info": {
+          "package_name": "com.oyver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087243601746-5805m302t592bm52dj1cvvob96dkic1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgHVxQaKStoqVYx4-tbYtTBKCZW3CkDY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087243601746-5805m302t592bm52dj1cvvob96dkic1t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
