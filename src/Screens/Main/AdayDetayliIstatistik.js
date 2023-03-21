@@ -138,7 +138,7 @@ export default class AdayDetayliIstatistik extends Component {
 
                         <View style={{backgroundColor: "transparent", alignItems: 'center'}}>
                             <BannerAd
-                                unitId={TestIds.BANNER}//{"ca-app-pub-7764130368146320/7086050815"}
+                                unitId="ca-app-pub-7764130368146320/7086050815"//!< banner
                                 size={BannerAdSize.FULL_BANNER}
                                 requestOptions={{
                                 requestNonPersonalizedAdsOnly: true,}}

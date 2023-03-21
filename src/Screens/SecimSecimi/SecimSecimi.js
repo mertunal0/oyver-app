@@ -78,7 +78,7 @@ export default class SecimSecimi extends Component {
 
                 <View style={{position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: "transparent", alignItems: 'center'}}>
                     <BannerAd
-                        unitId={TestIds.BANNER}//{"ca-app-pub-7764130368146320/7086050815"}
+                        unitId="ca-app-pub-7764130368146320/8023991293"//!< banner4
                         size={BannerAdSize.FULL_BANNER}
                         requestOptions={{
                         requestNonPersonalizedAdsOnly: true,}}
