@@ -95,7 +95,7 @@ export default class Timeline extends Component {
                             <View style={{backgroundColor: "transparent", alignItems: 'center'}}>
                                 <BannerAd
                                     unitId="ca-app-pub-7764130368146320/9337072967"//!< banner3
-                                    size={BannerAdSize.FULL_BANNER}
+                                    size={BannerAdSize.BANNER}
                                     requestOptions={{
                                     requestNonPersonalizedAdsOnly: true,}}
                                     onAdLoaded={() => {

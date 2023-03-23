@@ -17,27 +17,60 @@ export default class Register extends Component {
             surname: "",
 
             deviceId: "",
+            isLogin: 0,
         };
     }
 
 
     onRegisterPress = () => {
         DeviceInfo.getUniqueId().then(deviceId => {
-            Services.generalService("/Users/NewUser", { Name: this.state.name, Surname: this.state.surname, DeviceId: deviceId}).then((res) => {
-                if (res.UserId > 0) {
-                    AsyncBus.SetLocalStorage("IsLogin","1");
-                    AsyncBus.SetLocalStorage("IsIntro","1");
-                    AsyncBus.SetLocalStorage("Token", res.Token)
-                    AsyncBus.SetLocalStorage("UserId", res.UserId.toString())
-                    AsyncBus.SetLocalStorage("DeviceId", this.state.deviceId)
-    
-                    const resetAction = CommonActions.reset({
-                        index: 0,
-                        key: null,
-                        routes: [{name: "SecimSecimi", screen: 'SecimSecimi'}]
+            Services.generalServicePrivate("/Users/TokenControl", {EmailAddress: deviceId}).then((res) => {
+                if (res?.UserId > 0) {
+                    this.setState({isLogin: 1});
+                    AsyncBus.SetLocalStorage("UserId", res.UserId.toString());
+
+                    //!< Daha onceden secilen bir secim id'si var mi?
+                    AsyncBus.GetLocalStorage("SeciliSecimId").then(id => {
+                        //!< Varsa setleyelim ve direkt main router'a yonlendirelim
+                        if(parseInt(id) > 0)
+                        {
+                            AsyncBus.GetLocalStorage("SeciliSecimAdi").then(ad => {
+                                this.setState({seciliSecimAdi: ad})
+                                global.seciliSecimAdi = ad
+
+                                this.setState({seciliSecimId: parseInt(id)})
+                                global.seciliSecimId    = parseInt(id)
+
+                                this.props.navigation.navigate("MainRouter")
+                            })
+                        }
+                        //!< Yoksa SecimSecimi ekranina yonlendirelim
+                        else
+                        {
+                            this.props.navigation.navigate("SecimSecimi")
+                        }
                     });
-                    this.props.navigation.dispatch(resetAction); 
                 }
+                else
+                {
+                    Services.generalService("/Users/NewUser", { Name: this.state.name, Surname: this.state.surname, DeviceId: deviceId}).then((res) => {
+                        if (res.UserId > 0) {
+                            AsyncBus.SetLocalStorage("IsLogin","1");
+                            AsyncBus.SetLocalStorage("IsIntro","1");
+                            AsyncBus.SetLocalStorage("Token", res.Token)
+                            AsyncBus.SetLocalStorage("UserId", res.UserId.toString())
+                            AsyncBus.SetLocalStorage("DeviceId", this.state.deviceId)
+            
+                            const resetAction = CommonActions.reset({
+                                index: 0,
+                                key: null,
+                                routes: [{name: "SecimSecimi", screen: 'SecimSecimi'}]
+                            });
+                            this.props.navigation.dispatch(resetAction); 
+                        }
+                    })
+                }
+                
             })
         } )
         

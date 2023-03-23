@@ -2,7 +2,8 @@ import DeviceInfo from 'react-native-device-info';
 import AsyncBus from './AsyncBus';
 
 
-var url = 'https://9877-91-93-229-225.eu.ngrok.io/api';
+var url = 'https://oyverapp.azurewebsites.net/api';
+//var url = 'https://98dc-91-93-229-126.eu.ngrok.io/api';
 
 
 export function serializeKey(data, UserId, TokenId, DeviceId, user?) {
@@ -69,7 +70,6 @@ class APIConnection {
             let UserId = user ? user : await AsyncBus.GetLocalStorage('UserId');
             let TokenId = await AsyncBus.GetLocalStorage('Token');
             let DeviceId = await AsyncBus.GetLocalStorage('DeviceId');
-
             if (UserId !== null && TokenId !== null) {
                 var r = {
                     method: 'POST',
@@ -82,7 +82,7 @@ class APIConnection {
                 
 
                 return await fetch(url + tagUrl, r)
-                    .then(response => response.json())
+                    .then(response => response.json()  )
                     .then(responseJson => {
                         if (responseJson.IsError) {
                             return responseJson.IsError;

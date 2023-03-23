@@ -116,7 +116,7 @@ export default class OyVer extends Component {
                 <TopBar props={this.props}/>
 
                 <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
-                    <ScrollView style={{paddingHorizontal: 15}} showsVerticalScrollIndicator={false}>
+                    <ScrollView style={{paddingHorizontal: 15, height: window.height - 110}} showsVerticalScrollIndicator={false}>
                         <View style={{height: 60}}></View>
                         
                         { false == this.state.userSonOy?.OyVerilmis && (
@@ -162,6 +162,8 @@ export default class OyVer extends Component {
                                 <Text style={styles.saveText}>Oyunu Değiştir</Text>
                             </TouchableOpacity>
                         )}
+
+                        <View style={{height: 30}} />
 
                         <FancyAlert
                             icon={<View style={styles.fancyAlertIcon}><MaterialIcons name='update' size={40} color='#a9927d'/></View>}
