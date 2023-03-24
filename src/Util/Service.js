@@ -4,6 +4,7 @@ import AsyncBus from './AsyncBus';
 
 var url = 'https://oyverapp.azurewebsites.net/api';
 //var url = 'https://98dc-91-93-229-126.eu.ngrok.io/api';
+//var url = 'https://oyverserver1232345547455341231.serveo.net/api'
 
 
 export function serializeKey(data, UserId, TokenId, DeviceId, user?) {
@@ -82,7 +83,7 @@ class APIConnection {
                 
 
                 return await fetch(url + tagUrl, r)
-                    .then(response => response.json()  )
+                    .then(response =>  response.json()  )
                     .then(responseJson => {
                         if (responseJson.IsError) {
                             return responseJson.IsError;
