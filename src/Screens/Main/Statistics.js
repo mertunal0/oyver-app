@@ -27,6 +27,11 @@ export default class Statistics extends Component {
 
     componentDidMount = () => 
     {
+        this.getGenelSecimDetaylari();
+    }
+
+    getGenelSecimDetaylari = () => 
+    {
         Services.generalServicePrivate("/Users/GetGenelMevcutDurumBySecimId", {SecimId: this.state.secimId})
         .then(list => {
             if(list)
@@ -44,6 +49,17 @@ export default class Statistics extends Component {
                                 aktifRenkler: arr}, () => this.setState({loading: false}))
             }
         })
+    }
+
+    handleRefresh = () => 
+    {
+        this.setState({refreshing: true})
+        this.getGenelSecimDetaylari()
+        this.setState({refreshing: false})
+    }
+
+    onEndReached = () =>  
+    {
     }
 
     DegisimYuzdeTextOlustur = (yuzde) => 
@@ -73,36 +89,19 @@ export default class Statistics extends Component {
                 <TopBar props={this.props}/>
 
                 <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
-                    <ScrollView style={{paddingHorizontal: 15, height: window.height - 170}} showsVerticalScrollIndicator={false}>
-                        
-                        <View style={{height: 40}} />
-                        <Text style={styles.title}>Genel Oy Dağılımı</Text>
-                        
-                        <View style={{marginTop: 8}}>
-                            { !this.state.loading && (
-                                <View style={styles.subView1}>
-                                    <PieChart
-                                        widthAndHeight={140}
-                                        series={this.state.aktifChartElemanlari}
-                                        sliceColor={this.state.aktifRenkler}
-                                    />
-                                    <View>
-                                        { this.state.detailedDurumList.map((item, idx) => (
-                                            <View style={styles.subView2} key={idx}>
-                                                <Text style={styles.adayIsmiText}>{item.Isim}</Text>
-                                                <Text style={[styles.yuzdelikText, {color: this.state.aktifRenkler[idx]}]}>{(item.MevcutOyYuzdesi * 100).toFixed(2)}%</Text>
-                                            </View>
-                                        ))}
-                                    </View>
-                                </View>
-                            )}
-                        </View>
-
-                        <View style={{height: 40}} />
-
-                        <Text style={styles.title}>Adaylar ve Günlük Oy Değişimi</Text>
-
-                        {this.state.detailedDurumList.map((item, idx) => (
+                    <FlatList
+                        refreshControl={<RefreshControl onRefresh={() => this.handleRefresh()} refreshing={this.state.refreshing}/>}
+                        onScroll={(e) => {
+                            if (e.nativeEvent.contentOffset.y > e.nativeEvent.contentSize.height - 1200) {this.onEndReached(); }
+                        }}
+                        style={{
+                            paddingHorizontal: 15,
+                            backgroundColor: 'transparent',
+                            height: window.height - 170
+                        }}
+                        data={this.state.detailedDurumList.length > 0 ? this.state.detailedDurumList : []}
+                        keyExtractor={item => item.Id}
+                        renderItem={({ item, idx }) => (
                             <TouchableOpacity key={idx} style={styles.subItemText} onPress={() => this.props.navigation.navigate("AdayDetayliIstatistik", {AdaylikId: item.AdaylikId})}>
                                 <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 15}}>
                                     <Image style={{height: 50, width: 50, borderRadius: 5, resizeMode: 'contain'}} source={{ uri: item.Fotograf ? item.Fotograf : "https://i.hizliresim.com/ai4h1o9.png"}} />
@@ -127,8 +126,38 @@ export default class Statistics extends Component {
                                     <Octicons name='chevron-right' size={24} color={'#8b5e34'} />
                                 </View>
                             </TouchableOpacity>
-                        ))}
-                    </ScrollView>
+                        )}
+                        ListHeaderComponent={(
+                            <View>
+                                <View style={{height: 40}} />
+                                <Text style={styles.title}>Genel Oy Dağılımı</Text>
+                                
+                                <View style={{marginTop: 8}}>
+                                    { !this.state.loading && (
+                                        <View style={styles.subView1}>
+                                            <PieChart
+                                                widthAndHeight={140}
+                                                series={this.state.aktifChartElemanlari}
+                                                sliceColor={this.state.aktifRenkler}
+                                            />
+                                            <View>
+                                                { this.state.detailedDurumList.map((item, idx) => (
+                                                    <View style={styles.subView2} key={idx}>
+                                                        <Text style={styles.adayIsmiText}>{item.Isim}</Text>
+                                                        <Text style={[styles.yuzdelikText, {color: this.state.aktifRenkler[idx]}]}>{(item.MevcutOyYuzdesi * 100).toFixed(2)}%</Text>
+                                                    </View>
+                                                ))}
+                                            </View>
+                                        </View>
+                                    )}
+                                </View>
+
+                                <View style={{height: 40}} />
+
+                                <Text style={styles.title}>Adaylar ve Günlük Oy Değişimi</Text>
+                            </View>
+                        )}
+                    />
                 </ImageBackground>
 
                 <View style={{position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: "transparent", alignItems: 'center'}}>
