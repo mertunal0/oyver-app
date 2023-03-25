@@ -73,6 +73,7 @@ export default class OyVer extends Component {
                 {
                     this.sonOyuCek();
                     this.setState({showOyVerildiAlert: true})
+                    global.seciliSecimIcinOyVerilmis = true
                 }
             })
         }

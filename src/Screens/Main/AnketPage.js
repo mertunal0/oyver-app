@@ -138,7 +138,7 @@ export default class AnketPage extends Component {
                                                     <Image style={{width: 10, height: 10}} source={{uri: "https://i.hizliresim.com/lkmlz47.png"}} /> 
                                                 </View>
                                             </View>
-                                            <Text style={{fontSize: 14, marginTop: -2, marginLeft: 4}}>{item.TercihOrani * 100}%</Text>
+                                            <Text style={{fontSize: 14, marginTop: -2, marginLeft: 4}}>%{ ((item.TercihOrani * 100) % 1 != 0) ? (item.TercihOrani * 100).toFixed(2) : (item.TercihOrani * 100)}</Text>
                                         </View>
                                     </View>
                                 )}

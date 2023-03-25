@@ -69,14 +69,14 @@ export default class Statistics extends Component {
         if( (yuzde >= 0 && yuzde <  0.01)  || 
             (yuzde <= 0 && yuzde > -0.01)  )
         {
-            yuzde_text = "0%"
+            yuzde_text = "%0"
         }
         else
         {
             yuzde_text = (yuzde*100).toFixed(2)
 
-            if(yuzde < 0)   yuzde_text = "-"+yuzde_text+"%";
-            else            yuzde_text =     yuzde_text+"%";
+            if(yuzde < 0)   yuzde_text = "%"+"-"+yuzde_text;
+            else            yuzde_text =     "%"+yuzde_text;
         }
 
         return yuzde_text;
@@ -99,9 +99,9 @@ export default class Statistics extends Component {
                         </View>
                         <View style={{width: '100%', alignItems: 'center', justifyContent: 'center'}}>
                             <View style={{width: '80%', alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={styles.title}>Bu seçimin istatistiklerini görebilmek için oy ver.</Text>
+                                <Text style={styles.title}>Bu seçimin istatistiklerini görebilmek için Oy Ver.</Text>
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate("OyverRouter")} style={styles.saveBtn}>
-                                    <Text style={styles.saveText}>Oy Verelim</Text>
+                                    <Text style={styles.saveText}>Oy Ver</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -144,10 +144,10 @@ export default class Statistics extends Component {
                                     </View>
                                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', flex: 22}}>
                                         { item.DegisimYuzde < -0.01 && (<Entypo size={24} name="triangle-down" color={"#f00"}/>)}
-                                        { item.DegisimYuzde > 0.01 && (<Entypo size={24} name="triangle-up" color={"#00db50"}/>)}
+                                        { item.DegisimYuzde > 0.01 && (<Entypo size={24} name="triangle-up" color={"#009900"}/>)}
                                         { item.DegisimYuzde <= 0.01  &&
                                         item.DegisimYuzde >= -0.01 && (<Ionicons size={24} name="remove-outline" color={"#333"}/>)}
-                                        <Text style={{color: item.DegisimYuzde > 0.01 ? "#00db50" : item.DegisimYuzde < -0.01 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
+                                        <Text style={{color: item.DegisimYuzde > 0.01 ? "#009900" : item.DegisimYuzde < -0.01 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
                                     </View>
                                     <View style={{justifyContent: 'center', alignItems: 'flex-end', flex: 5}}>
                                         <Octicons name='chevron-right' size={24} color={'#8b5e34'} />
@@ -171,7 +171,7 @@ export default class Statistics extends Component {
                                                     { this.state.detailedDurumList.map((item, idx) => (
                                                         <View style={styles.subView2} key={idx}>
                                                             <Text style={styles.adayIsmiText}>{item.Isim}</Text>
-                                                            <Text style={[styles.yuzdelikText, {color: this.state.aktifRenkler[idx]}]}>{(item.MevcutOyYuzdesi * 100).toFixed(2)}%</Text>
+                                                            <Text style={[styles.yuzdelikText, {color: this.state.aktifRenkler[idx]}]}>%{(item.MevcutOyYuzdesi * 100).toFixed(2)}</Text>
                                                         </View>
                                                     ))}
                                                 </View>
