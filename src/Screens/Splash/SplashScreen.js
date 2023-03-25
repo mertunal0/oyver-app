@@ -17,6 +17,21 @@ export default class Splash extends Component {
         };
     }
 
+
+    sonOyuCek = (secimId) => {
+        Services.generalServicePrivate("/Users/GetUserSonOyBySecimId", {SecimId: secimId})
+        .then(oy => {
+            if(oy?.OyVerilmis)
+            {
+                global.seciliSecimIcinOyVerilmis = true
+            }
+            else
+            {
+                global.seciliSecimIcinOyVerilmis = false
+            }
+        })
+    }
+
     componentDidMount = () => {
         mobileAds().initialize()
         .then(adapterStatuses => {
@@ -46,6 +61,8 @@ export default class Splash extends Component {
     
                                     this.setState({seciliSecimId: parseInt(id)})
                                     global.seciliSecimId    = parseInt(id)
+
+                                    this.sonOyuCek(parseInt(id))
     
                                     this.props.navigation.navigate("MainRouter")
                                 })

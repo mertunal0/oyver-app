@@ -26,10 +26,26 @@ export default class SecimSecimi extends Component {
         })
     }
 
+    sonOyuCek = (secimId) => {
+        Services.generalServicePrivate("/Users/GetUserSonOyBySecimId", {SecimId: secimId})
+        .then(oy => {
+            if(oy?.OyVerilmis)
+            {
+                global.seciliSecimIcinOyVerilmis = true
+            }
+            else
+            {
+                global.seciliSecimIcinOyVerilmis = false
+            }
+        })
+    }
+
     secimiSec = (secimId, secimAdi) => {
         //!< Globali setleyelim
         global.seciliSecimId    = secimId
         global.seciliSecimAdi   = secimAdi
+
+        this.sonOyuCek(secimId)
 
         //!< Storagei da setleyelim ki tekrar appe girince kullanalim
         AsyncBus.SetLocalStorage("SeciliSecimId"    , secimId.toString())

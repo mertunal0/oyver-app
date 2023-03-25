@@ -84,96 +84,124 @@ export default class Statistics extends Component {
 
 
     render() {
-        return(
-            <View style={styles.page}>
-                <TopBar props={this.props}/>
+        if(global.seciliSecimIcinOyVerilmis == false)
+        {
+            return(
+                <View style={styles.page}>
+                    <TopBar props={this.props}/>
 
-                <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
-                    <FlatList
-                        refreshControl={<RefreshControl onRefresh={() => this.handleRefresh()} refreshing={this.state.refreshing}/>}
-                        onScroll={(e) => {
-                            if (e.nativeEvent.contentOffset.y > e.nativeEvent.contentSize.height - 1200) {this.onEndReached(); }
-                        }}
-                        style={{
-                            paddingHorizontal: 15,
-                            backgroundColor: 'transparent',
-                            height: window.height - 170
-                        }}
-                        data={this.state.detailedDurumList.length > 0 ? this.state.detailedDurumList : []}
-                        keyExtractor={item => item.Id}
-                        renderItem={({ item, idx }) => (
-                            <TouchableOpacity key={idx} style={styles.subItemText} onPress={() => this.props.navigation.navigate("AdayDetayliIstatistik", {AdaylikId: item.AdaylikId})}>
-                                <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 15}}>
-                                    <Image style={{height: 50, width: 50, borderRadius: 5, resizeMode: 'contain'}} source={{ uri: item.Fotograf ? item.Fotograf : "https://i.hizliresim.com/ai4h1o9.png"}} />
-                                </View>
-                                <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 58}}>
-                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                        <Image style={{height: 20, width: 20, borderRadius: 20, resizeMode: 'contain'}} source={{ uri: item.PartiAmblem ? item.PartiAmblem : "https://i.hizliresim.com/m8oy14v.png"}} />
-                                        <Text style={styles.adayNameText}   >{item.Isim}</Text>
-                                    </View>
-                                    { item.KoalisyonAdi != "Koalisyonsuz" && (
-                                        <Text style={styles.ittifakAdiText} >{item.KoalisyonAdi}</Text>
-                                    )}
-                                </View>
-                                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', flex: 22}}>
-                                    { item.DegisimYuzde < -0.01 && (<Entypo size={24} name="triangle-down" color={"#f00"}/>)}
-                                    { item.DegisimYuzde > 0.01 && (<Entypo size={24} name="triangle-up" color={"#00db50"}/>)}
-                                    { item.DegisimYuzde <= 0.01  &&
-                                      item.DegisimYuzde >= -0.01 && (<Ionicons size={24} name="remove-outline" color={"#333"}/>)}
-                                    <Text style={{color: item.DegisimYuzde > 0.01 ? "#00db50" : item.DegisimYuzde < -0.01 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
-                                </View>
-                                <View style={{justifyContent: 'center', alignItems: 'flex-end', flex: 5}}>
-                                    <Octicons name='chevron-right' size={24} color={'#8b5e34'} />
-                                </View>
-                            </TouchableOpacity>
-                        )}
-                        ListHeaderComponent={(
-                            <View>
-                                <View style={{height: 40}} />
-                                <Text style={styles.title}>Genel Oy Dağılımı</Text>
-                                
-                                <View style={{marginTop: 8}}>
-                                    { !this.state.loading && (
-                                        <View style={styles.subView1}>
-                                            <PieChart
-                                                widthAndHeight={140}
-                                                series={this.state.aktifChartElemanlari}
-                                                sliceColor={this.state.aktifRenkler}
-                                            />
-                                            <View>
-                                                { this.state.detailedDurumList.map((item, idx) => (
-                                                    <View style={styles.subView2} key={idx}>
-                                                        <Text style={styles.adayIsmiText}>{item.Isim}</Text>
-                                                        <Text style={[styles.yuzdelikText, {color: this.state.aktifRenkler[idx]}]}>{(item.MevcutOyYuzdesi * 100).toFixed(2)}%</Text>
-                                                    </View>
-                                                ))}
-                                            </View>
-                                        </View>
-                                    )}
-                                </View>
-
-                                <View style={{height: 40}} />
-
-                                <Text style={styles.title}>Adaylar ve Günlük Oy Değişimi</Text>
+                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{width:"100%", height: "100%", alignItems: 'flex-start'}}>
+                        <View style={{width: '100%', alignItems: 'center', justifyContent: 'center'}}>
+                            <View style={{width: '80%', flexDirection: "row", justifyContent: 'flex-start', alignItems: 'center', marginTop: window.height / 4}}>
+                                <Image style={{width: 20, height: 20}} source={{uri: "https://i.hizliresim.com/lkmlz47.png"}} />
+                                <Text style={{fontSize: 12, fontFamily: "Inter-Medium", marginLeft: 4}}>Tüm oylar gizli kalır.</Text>
                             </View>
-                        )}
-                    />
-                </ImageBackground>
-
-                <View style={{position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: "transparent", alignItems: 'center'}}>
-                    <BannerAd
-                        unitId="ca-app-pub-7764130368146320/2646158646"//!< banner2
-                        size={BannerAdSize.BANNER}
-                        requestOptions={{
-                        requestNonPersonalizedAdsOnly: true,}}
-                        onAdLoaded={() => {
-                        console.log('Advert loaded');}}
-                        onAdFailedToLoad={(error) => {
-                        console.error('Advert failed to load: ', error);}}
-                    />
+                        </View>
+                        <View style={{width: '100%', alignItems: 'center', justifyContent: 'center'}}>
+                            <View style={{width: '80%', alignItems: 'center', justifyContent: 'center'}}>
+                                <Text style={styles.title}>Bu seçimin istatistiklerini görebilmek için oy ver.</Text>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate("OyverRouter")} style={styles.saveBtn}>
+                                    <Text style={styles.saveText}>Oy Verelim</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </ImageBackground>
                 </View>
-            </View>
-        )
+            )
+        }
+        else
+        {
+            return(
+                <View style={styles.page}>
+                    <TopBar props={this.props}/>
+
+                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                        <FlatList
+                            refreshControl={<RefreshControl onRefresh={() => this.handleRefresh()} refreshing={this.state.refreshing}/>}
+                            onScroll={(e) => {
+                                if (e.nativeEvent.contentOffset.y > e.nativeEvent.contentSize.height - 1200) {this.onEndReached(); }
+                            }}
+                            style={{
+                                paddingHorizontal: 15,
+                                backgroundColor: 'transparent',
+                                height: window.height - 170
+                            }}
+                            data={this.state.detailedDurumList.length > 0 ? this.state.detailedDurumList : []}
+                            keyExtractor={item => item.Id}
+                            renderItem={({ item, idx }) => (
+                                <TouchableOpacity key={idx} style={styles.subItemText} onPress={() => this.props.navigation.navigate("AdayDetayliIstatistik", {AdaylikId: item.AdaylikId})}>
+                                    <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 15}}>
+                                        <Image style={{height: 50, width: 50, borderRadius: 5, resizeMode: 'contain'}} source={{ uri: item.Fotograf ? item.Fotograf : "https://i.hizliresim.com/ai4h1o9.png"}} />
+                                    </View>
+                                    <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 58}}>
+                                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                            <Image style={{height: 20, width: 20, borderRadius: 20, resizeMode: 'contain'}} source={{ uri: item.PartiAmblem ? item.PartiAmblem : "https://i.hizliresim.com/m8oy14v.png"}} />
+                                            <Text style={styles.adayNameText}   >{item.Isim}</Text>
+                                        </View>
+                                        { item.KoalisyonAdi != "Koalisyonsuz" && (
+                                            <Text style={styles.ittifakAdiText} >{item.KoalisyonAdi}</Text>
+                                        )}
+                                    </View>
+                                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', flex: 22}}>
+                                        { item.DegisimYuzde < -0.01 && (<Entypo size={24} name="triangle-down" color={"#f00"}/>)}
+                                        { item.DegisimYuzde > 0.01 && (<Entypo size={24} name="triangle-up" color={"#00db50"}/>)}
+                                        { item.DegisimYuzde <= 0.01  &&
+                                        item.DegisimYuzde >= -0.01 && (<Ionicons size={24} name="remove-outline" color={"#333"}/>)}
+                                        <Text style={{color: item.DegisimYuzde > 0.01 ? "#00db50" : item.DegisimYuzde < -0.01 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
+                                    </View>
+                                    <View style={{justifyContent: 'center', alignItems: 'flex-end', flex: 5}}>
+                                        <Octicons name='chevron-right' size={24} color={'#8b5e34'} />
+                                    </View>
+                                </TouchableOpacity>
+                            )}
+                            ListHeaderComponent={(
+                                <View>
+                                    <View style={{height: 40}} />
+                                    <Text style={styles.title}>Genel Oy Dağılımı</Text>
+                                    
+                                    <View style={{marginTop: 8}}>
+                                        { !this.state.loading && (
+                                            <View style={styles.subView1}>
+                                                <PieChart
+                                                    widthAndHeight={140}
+                                                    series={this.state.aktifChartElemanlari}
+                                                    sliceColor={this.state.aktifRenkler}
+                                                />
+                                                <View>
+                                                    { this.state.detailedDurumList.map((item, idx) => (
+                                                        <View style={styles.subView2} key={idx}>
+                                                            <Text style={styles.adayIsmiText}>{item.Isim}</Text>
+                                                            <Text style={[styles.yuzdelikText, {color: this.state.aktifRenkler[idx]}]}>{(item.MevcutOyYuzdesi * 100).toFixed(2)}%</Text>
+                                                        </View>
+                                                    ))}
+                                                </View>
+                                            </View>
+                                        )}
+                                    </View>
+
+                                    <View style={{height: 40}} />
+
+                                    <Text style={styles.title}>Adaylar ve Günlük Oy Değişimi</Text>
+                                </View>
+                            )}
+                        />
+                    </ImageBackground>
+
+                    <View style={{position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: "transparent", alignItems: 'center'}}>
+                        <BannerAd
+                            unitId="ca-app-pub-7764130368146320/2646158646"//!< banner2
+                            size={BannerAdSize.BANNER}
+                            requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,}}
+                            onAdLoaded={() => {
+                            console.log('Advert loaded');}}
+                            onAdFailedToLoad={(error) => {
+                            console.error('Advert failed to load: ', error);}}
+                        />
+                    </View>
+                </View>
+            )
+        }
     }
 }
 
@@ -242,6 +270,19 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         paddingRight: 6,
         borderRadius: 6,
-
+    },
+    saveBtn: {
+        marginTop: 8,
+        height: 36,
+        width: '50%',
+        backgroundColor: '#8b5e34',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    saveText: {
+        fontSize: 16,
+        color: '#fff',
+        fontFamily: 'Inter-Medium'
     },
 });
