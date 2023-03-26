@@ -21,7 +21,7 @@ export default class Splash extends Component {
     sonOyuCek = (secimId) => {
         Services.generalServicePrivate("/Users/GetUserSonOyBySecimId", {SecimId: secimId})
         .then(oy => {
-            if(oy?.OyVerilmis)
+            if(oy?.OyVerilmis == true)
             {
                 global.seciliSecimIcinOyVerilmis = true
             }

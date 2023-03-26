@@ -18,6 +18,7 @@ export default class Statistics extends Component {
         this.state = {
             loading: true,
             secimId: global.seciliSecimId,
+            oyVerilmis: false,
 
             detailedDurumList: [], //!< AdaylikId, DegisimYuzde, Fotograf, Isim, KoalisyonAdi, MevcutOySayisi, MevcutOyYuzdesi, PartiAdi, PartiAmblem
             renkler: ['#F44336','#ce7e00','#8fce00', '#2986cc', '#16537e', '#6a329f', '#c90076', '#660000', '#783f04', '#7f6000', '#274e13', '#0c343d', '#073763', '#20124d', '#741b47'],
@@ -34,6 +35,8 @@ export default class Statistics extends Component {
     {
         Services.generalServicePrivate("/Users/GetGenelMevcutDurumBySecimId", {SecimId: this.state.secimId})
         .then(list => {
+            this.setState({oyVerilmis: this.props.route.params?.OyVerilmis ? this.props.route.params.OyVerilmis : global.seciliSecimIcinOyVerilmis})
+            console.log(this.props.route.params?.OyVerilmis)
             if(list)
             {   
                 var arr = []
@@ -84,7 +87,7 @@ export default class Statistics extends Component {
 
 
     render() {
-        if(global.seciliSecimIcinOyVerilmis == false)
+        if(this.state.oyVerilmis == false)
         {
             return(
                 <View style={styles.page}>

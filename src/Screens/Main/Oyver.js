@@ -7,6 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import RadioBox from '../../Components/RadioBox';
 import Services from "../../Util/Service";
 import TopBar from '../../Components/TopBar';
+import { CommonActions } from '@react-navigation/native';
 
 const window = Dimensions.get('window');
 
@@ -72,8 +73,7 @@ export default class OyVer extends Component {
                 if(res.Response == 2)
                 {
                     this.sonOyuCek();
-                    this.setState({showOyVerildiAlert: true})
-                    global.seciliSecimIcinOyVerilmis = true
+                    this.setState({showOyVerildiAlert: true}, () => global.seciliSecimIcinOyVerilmis = true)
                 }
             })
         }
@@ -189,7 +189,18 @@ export default class OyVer extends Component {
                             <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18, color: '#000', margin: 15, marginTop: -16, marginBottom: 32, }}>
                                 Oyunu kullandın. Şimdi gelişmeleri takip et ve fikrin değişirse bize haber ver. Bu sırada istatistik sayfasının keyfini çıkar!
                             </Text>
-                            <TouchableOpacity onPress={() => this.setState({showOyVerildiAlert: false})} style={[styles.fancyAlertBtn, {backgroundColor: '#a9927d'}]}>
+                            <TouchableOpacity onPress={() => {
+                                this.setState({ showOyVerildiAlert: false}, () => {
+                                    global.seciliSecimIcinOyVerilmis = true
+                                    const resetAction = CommonActions.reset({
+                                        index: 0,
+                                        key: null,
+                                        routes: [{name: "StatisticsRouter", screen: 'Statistics', params: {OyVerilmis: true}}]
+                                    });
+                                    this.props.navigation.dispatch(resetAction); 
+                                })
+                                
+                                }} style={[styles.fancyAlertBtn, {backgroundColor: '#a9927d'}]}>
                                 <Text style={styles.fancyAlertBtnText}>Tamam</Text>
                             </TouchableOpacity>
                         </FancyAlert>
