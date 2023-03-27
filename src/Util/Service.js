@@ -3,7 +3,7 @@ import AsyncBus from './AsyncBus';
 
 
 var url = 'https://oyverapp2.azurewebsites.net/api';
-//var url = 'https://57e3-91-93-230-108.eu.ngrok.io/api';
+//var url = 'https://4242-91-93-229-234.eu.ngrok.io/api';
 //var url = 'https://oyverserver1232345547455341231.serveo.net/api'
 
 

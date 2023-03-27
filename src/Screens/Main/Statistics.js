@@ -36,7 +36,6 @@ export default class Statistics extends Component {
         Services.generalServicePrivate("/Users/GetGenelMevcutDurumBySecimId", {SecimId: this.state.secimId})
         .then(list => {
             this.setState({oyVerilmis: this.props.route.params?.OyVerilmis ? this.props.route.params.OyVerilmis : global.seciliSecimIcinOyVerilmis})
-            console.log(this.props.route.params?.OyVerilmis)
             if(list)
             {   
                 var arr = []
