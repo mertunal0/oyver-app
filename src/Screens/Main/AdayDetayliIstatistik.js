@@ -101,10 +101,10 @@ export default class AdayDetayliIstatistik extends Component {
                 <View style={styles.topBar}>
                     <Octicons name='chevron-left' size={32} color={'#fff'} onPress={() => this.props.navigation.goBack()} />
                     <Text style={styles.topBarText}>{global.seciliSecimAdi}</Text>
-                    <Octicons name='chevron-right' size={0} color={'#fff'} onPress={() => {}} />
+                    <Octicons name='chevron-right' style={{height: 0, width: 0}} size={0} color={'#fff'} onPress={() => {}} />
                 </View>
 
-                <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                     <ScrollView style={{paddingHorizontal: 15, height: window.height - 100}} showsVerticalScrollIndicator={false}>
                         <Text style={styles.title}>Aday Profili</Text>
 
@@ -138,7 +138,7 @@ export default class AdayDetayliIstatistik extends Component {
 
                         <View style={{backgroundColor: "transparent", alignItems: 'center'}}>
                             <BannerAd
-                                unitId="ca-app-pub-7764130368146320/7086050815"//!< banner
+                                unitId= {Platform.OS === 'ios' ? "ca-app-pub-7764130368146320/2373677975" : "ca-app-pub-7764130368146320/7086050815"}//!< banner
                                 size={BannerAdSize.BANNER}
                                 requestOptions={{
                                 requestNonPersonalizedAdsOnly: true,}}
@@ -223,6 +223,8 @@ export default class AdayDetayliIstatistik extends Component {
                                 //thickness={3}
                             />
                         </View>
+
+                        <View style={{height: Platform.OS === 'ios' ? 70 : 10}} />
 
                     </ScrollView>
                 </ImageBackground>

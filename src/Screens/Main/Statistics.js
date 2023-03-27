@@ -93,7 +93,7 @@ export default class Statistics extends Component {
                 <View style={styles.page}>
                     <TopBar props={this.props}/>
 
-                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{width:"100%", height: "100%", alignItems: 'flex-start'}}>
+                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{width:"100%", height: "100%", alignItems: 'flex-start'}}>
                         <View style={{width: '100%', alignItems: 'center', justifyContent: 'center'}}>
                             <View style={{width: '80%', flexDirection: "row", justifyContent: 'flex-start', alignItems: 'center', marginTop: window.height / 4}}>
                                 <Image style={{width: 20, height: 20}} source={{uri: "https://i.hizliresim.com/lkmlz47.png"}} />
@@ -118,7 +118,7 @@ export default class Statistics extends Component {
                 <View style={styles.page}>
                     <TopBar props={this.props}/>
 
-                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                         <FlatList
                             refreshControl={<RefreshControl onRefresh={() => this.handleRefresh()} refreshing={this.state.refreshing}/>}
                             onScroll={(e) => {
@@ -157,6 +157,9 @@ export default class Statistics extends Component {
                                     </View>
                                 </TouchableOpacity>
                             )}
+                            ListFooterComponent={(
+                                <View style={{height: Platform.OS === 'ios' ? 60 : 10}} />
+                            )}
                             ListHeaderComponent={(
                                 <View>
                                     <View style={{height: 40}} />
@@ -192,7 +195,7 @@ export default class Statistics extends Component {
 
                     <View style={{position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: "transparent", alignItems: 'center'}}>
                         <BannerAd
-                            unitId="ca-app-pub-7764130368146320/2646158646"//!< banner2
+                            unitId= {Platform.OS === 'ios' ? "ca-app-pub-7764130368146320/2373677975" : "ca-app-pub-7764130368146320/2646158646"}//!< banner2
                             size={BannerAdSize.BANNER}
                             requestOptions={{
                             requestNonPersonalizedAdsOnly: true,}}

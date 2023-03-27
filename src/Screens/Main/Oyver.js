@@ -106,7 +106,7 @@ export default class OyVer extends Component {
             return(
                 <View style={styles.page}>
                     <TopBar props={this.props}/>
-                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                         
                     </ImageBackground>
                 </View>
@@ -116,7 +116,7 @@ export default class OyVer extends Component {
             <View style={styles.page}>
                 <TopBar props={this.props}/>
 
-                <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                     <ScrollView style={{paddingHorizontal: 15, height: window.height - 110}} showsVerticalScrollIndicator={false}>
                         <View style={{height: 60}}></View>
                         
@@ -164,15 +164,15 @@ export default class OyVer extends Component {
                             </TouchableOpacity>
                         )}
 
-                        <View style={{height: 30}} />
+                        <View style={{height: Platform.OS === 'ios' ? 80 : 30}} />
 
                         <FancyAlert
                             icon={<View style={styles.fancyAlertIcon}><MaterialIcons name='update' size={40} color='#a9927d'/></View>}
                             visible={this.state.showSureAlert}
                             style={{ backgroundColor: 'white' }}
                         >
-                            <Text style={{ fontFamily: 'Raleway-BOLD', fontSize: 20, color: '#000', margin: 15, marginTop: -16, marginBottom: 32 }}>ÇOK HIZLISIN</Text>
-                            <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18, color: '#000', margin: 15, marginTop: -16, marginBottom: 32, }}>
+                            <Text style={{ fontFamily: 'Inter-Bold', fontSize: 20, color: '#000', margin: 15, marginTop: -16, marginBottom: 32 }}>ÇOK HIZLISIN</Text>
+                            <Text style={{ fontFamily: 'Inter-Regular', fontSize: 18, color: '#000', margin: 15, marginTop: -16, marginBottom: 32, }}>
                                 Sadece 24 saatte bir fikrini değiştirebilirsin. Henüz sürenin dolmasına {parseInt(24 - this.state.userSonOy?.GecenSureSn/3600) } saat var.
                             </Text>
                             <TouchableOpacity onPress={() => this.setState({showSureAlert: false})} style={styles.fancyAlertBtn}>
@@ -185,8 +185,8 @@ export default class OyVer extends Component {
                             visible={this.state.showOyVerildiAlert}
                             style={{ backgroundColor: 'white' }}
                         >
-                            <Text style={{ fontFamily: 'Raleway-BOLD', fontSize: 20, color: '#000', margin: 15, marginTop: -16, marginBottom: 32 }}>HARİKA</Text>
-                            <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18, color: '#000', margin: 15, marginTop: -16, marginBottom: 32, }}>
+                            <Text style={{ fontFamily: 'Inter-Bold', fontSize: 20, color: '#000', margin: 15, marginTop: -16, marginBottom: 32 }}>HARİKA</Text>
+                            <Text style={{ fontFamily: 'Inter-Regular', fontSize: 18, color: '#000', margin: 15, marginTop: -16, marginBottom: 32, }}>
                                 Oyunu kullandın. Şimdi gelişmeleri takip et ve fikrin değişirse bize haber ver. Bu sırada istatistik sayfasının keyfini çıkar!
                             </Text>
                             <TouchableOpacity onPress={() => {
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
         borderRadius: 15
     },
     fancyAlertBtnText: { 
-        fontFamily: 'Raleway-Black', 
+        fontFamily: 'Inter-Regular', 
         fontSize: 16, 
         color: '#fff' 
     }

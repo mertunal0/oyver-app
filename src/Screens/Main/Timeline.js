@@ -69,7 +69,7 @@ export default class Timeline extends Component {
             <View style={styles.page}>
                 <TopBar props={this.props}/>
 
-                <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                     <FlatList
                         refreshControl={<RefreshControl onRefresh={() => this.handleRefresh()} refreshing={this.state.refreshing}/>}
                         onScroll={(e) => {
@@ -91,10 +91,13 @@ export default class Timeline extends Component {
                                 props={this.props}
                             />
                         )}
+                        ListFooterComponent={(
+                            <View style={{height: Platform.OS === 'ios' ? 70 : 10}} />
+                        )}
                         ListHeaderComponent={(
                             <View style={{backgroundColor: "transparent", alignItems: 'center'}}>
                                 <BannerAd
-                                    unitId="ca-app-pub-7764130368146320/9337072967"//!< banner3
+                                    unitId= {Platform.OS === 'ios' ? "ca-app-pub-7764130368146320/2373677975" : "ca-app-pub-7764130368146320/9337072967"}//!< banner3
                                     size={BannerAdSize.BANNER}
                                     requestOptions={{
                                     requestNonPersonalizedAdsOnly: true,}}

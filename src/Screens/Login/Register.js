@@ -78,7 +78,7 @@ export default class Register extends Component {
 
     render() {
         return(
-        <ImageBackground style={styles.page} source={require('../../Image/bg.png')}>
+        <ImageBackground blurRadius={Platform.OS === 'ios' ? 90 : 300} style={styles.page} source={require('../../Image/bg.png')}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={styles.title}>İlk defa mı geliyorsun? Hadi başlayalım.</Text>
                 <Text style={styles.subtitle}>Hiçbir bilgi zorunlu değil. İstersen boş bırakabilirsin!</Text>

@@ -91,7 +91,7 @@ export default class AnketPage extends Component {
                         <Text style={styles.topBarText}>{global.seciliSecimAdi}</Text>
                         <Octicons name='chevron-right' size={0} color={'#fff'} onPress={() => {}} />
                     </View>
-                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                    <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                         
                     </ImageBackground>
                 </View>
@@ -105,7 +105,7 @@ export default class AnketPage extends Component {
                     <Octicons name='chevron-right' size={0} color={'#fff'} onPress={() => {}} />
                 </View>
 
-                <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
+                <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
 
                     <FlatList
                         refreshControl={<RefreshControl onRefresh={() => this.handleRefresh()} refreshing={this.state.refreshing}/>}

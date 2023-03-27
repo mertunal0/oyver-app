@@ -68,7 +68,7 @@ export default class SecimSecimi extends Component {
             <View style={styles.page}>
                 
 
-                <ImageBackground source={require("../../Image/bg.png")} blurRadius={300} resizeMode="stretch" style={{width:"100%", height: "100%"}}>
+                <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{width:"100%", height: "100%"}}>
                     <View style={styles.topBar}>
                         <Image style={{height: 50, width: 50, borderRadius: 5, resizeMode: 'contain'}} source={{ uri: "https://i.hizliresim.com/lkmlz47.png"}}/>
                     </View>
@@ -94,7 +94,7 @@ export default class SecimSecimi extends Component {
 
                 <View style={{position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: "transparent", alignItems: 'center'}}>
                     <BannerAd
-                        unitId="ca-app-pub-7764130368146320/8023991293"//!< banner4
+                        unitId= {Platform.OS === 'ios' ? "ca-app-pub-7764130368146320/2373677975" : "ca-app-pub-7764130368146320/8023991293"}//!< banner4
                         size={BannerAdSize.BANNER}
                         requestOptions={{
                         requestNonPersonalizedAdsOnly: true,}}
