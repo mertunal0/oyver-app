@@ -82,7 +82,7 @@ export default class Timeline extends Component {
                             backgroundColor: 'transparent'
                         }}
                         data={this.state.olaylar.length > 0 ? this.state.olaylar : []}
-                        keyExtractor={item => item.Id}
+                        keyExtractor={item => item.OlayText}
                         renderItem={({ item }) => (
                             <Olay
                                 olayId={item.Id}

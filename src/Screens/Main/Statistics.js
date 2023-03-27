@@ -129,7 +129,7 @@ export default class Statistics extends Component {
                                 height: window.height - 170
                             }}
                             data={this.state.detailedDurumList.length > 0 ? this.state.detailedDurumList : []}
-                            keyExtractor={item => item.Id}
+                            keyExtractor={item => item.Isim}
                             renderItem={({ item, idx }) => (
                                 <TouchableOpacity key={idx} style={styles.subItemText} onPress={() => this.props.navigation.navigate("AdayDetayliIstatistik", {AdaylikId: item.AdaylikId})}>
                                     <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 15}}>

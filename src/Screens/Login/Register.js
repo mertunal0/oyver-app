@@ -6,6 +6,9 @@ import { CommonActions } from '@react-navigation/native';
 import DeviceInfo from 'react-native-device-info';
 import AsyncBus from '../../Util/AsyncBus';
 import Services from "../../Util/Service";
+import RadioBox from '../../Components/RadioBox';
+import { FancyAlert } from 'react-native-expo-fancy-alerts';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 const window = Dimensions.get('window');
 
@@ -18,11 +21,20 @@ export default class Register extends Component {
 
             deviceId: "",
             isLogin: 0,
+
+            privacyPolicyAccepted: false,
+            showPolicyAlert: false,
         };
     }
 
 
     onRegisterPress = () => {
+        if(false == this.state.privacyPolicyAccepted)
+        {
+            this.setState({showPolicyAlert: true})
+            return
+        }
+
         DeviceInfo.getUniqueId().then(deviceId => {
             Services.generalServicePrivate("/Users/TokenControl", {EmailAddress: deviceId}).then((res) => {
                 if (res?.UserId > 0) {
@@ -103,7 +115,30 @@ export default class Register extends Component {
                     <Text style={styles.loginButtonText}>Başla</Text>
                 </TouchableOpacity>
 
+                <View style={{marginTop: 12, flexDirection: 'row', alignItems: 'center'}}>
+                    <RadioBox selected={this.state.privacyPolicyAccepted == true } setSelected={() => this.setState({privacyPolicyAccepted: !this.state.privacyPolicyAccepted})} />
+                    <Text style={{marginLeft: 4, fontSize: 16, color: "#000", fontFamily: 'Inter-Regular'}}>Oy Ver </Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("PrivacyPolicy")}>
+                        <Text style={{fontSize: 16, color: "#8b5e34", fontFamily: 'Inter-Regular'}}>Gizlilik Politikası</Text>
+                    </TouchableOpacity>
+                    <Text style={{fontSize: 16, color: "#000", fontFamily: 'Inter-Regular'}}>'nı onaylıyorum.</Text>
+                </View>
+
             </ScrollView>
+
+
+            <FancyAlert
+                icon={<View style={styles.fancyAlertIcon}><FontAwesome5 name='info' size={32} color='#a9927d'/></View>}
+                visible={this.state.showPolicyAlert}
+                style={{ backgroundColor: 'white' }}
+            >
+                <Text style={{ fontFamily: 'Inter-Regular', fontSize: 18, color: '#000', margin: 15, marginTop: -16, marginBottom: 32, }}>
+                    Devam etmeden önce gizlilik politikasını onaylaman gerekir.
+                </Text>
+                <TouchableOpacity onPress={() => this.setState({showPolicyAlert: false})} style={styles.fancyAlertBtn}>
+                    <Text style={styles.fancyAlertBtnText}>Tamam</Text>
+                </TouchableOpacity>
+            </FancyAlert>
         </ImageBackground>
         )
     }
@@ -166,4 +201,28 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter-Bold',
         color: '#fff'
     },
+    fancyAlertIcon: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 50,
+        width: '100%',
+    },
+    fancyAlertBtn: {
+        backgroundColor: '#a9927d', 
+        width: 200, 
+        height: 32, 
+        marginBottom: 15,
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        margin: 10, 
+        borderRadius: 15
+    },
+    fancyAlertBtnText: { 
+        fontFamily: 'Inter-Regular', 
+        fontSize: 16, 
+        color: '#fff' 
+    }
 });
