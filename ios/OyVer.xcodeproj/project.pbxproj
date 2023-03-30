@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* OyVerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OyVerTests.m */; };
-		01FBCF5E08744C72AFD080E1 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 145DBB7DDEAE4031AED8A7F7 /* Inter-SemiBold.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-OyVer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-OyVer.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		20450F14D6C542A391881331 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1CA30590E894F77969ABE1C /* Inter-Thin.ttf */; };
-		26351360548045CBBBA1F236 /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16AE67FCC6814ADAB370A0A5 /* Inter-ExtraLight.ttf */; };
-		370349F1DD3D471993D8B2E7 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FAE5DA6C8A949E59789DA03 /* Inter-Regular.ttf */; };
-		437B656F7086483C982775C0 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32C4228F56B94ADB99343DB0 /* Inter-Medium.ttf */; };
+		337607E929D360A100CC36B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		337607EA29D360B000CC36B2 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75F4676A9E6C4D8286336147 /* Inter-Black.ttf */; };
+		337607EB29D360B800CC36B2 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1B54DE84046493F820BD8CA /* Inter-Bold.ttf */; };
+		337607EC29D360BD00CC36B2 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 658F8955002F481484D2D5E0 /* Inter-ExtraBold.ttf */; };
+		337607ED29D360C400CC36B2 /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16AE67FCC6814ADAB370A0A5 /* Inter-ExtraLight.ttf */; };
+		337607EE29D360C900CC36B2 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 59DA23FAE0384354A22917C6 /* Inter-Light.ttf */; };
+		337607EF29D360CE00CC36B2 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32C4228F56B94ADB99343DB0 /* Inter-Medium.ttf */; };
+		337607F029D360D300CC36B2 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FAE5DA6C8A949E59789DA03 /* Inter-Regular.ttf */; };
+		337607F129D360D900CC36B2 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 145DBB7DDEAE4031AED8A7F7 /* Inter-SemiBold.ttf */; };
+		337607F229D360DD00CC36B2 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1CA30590E894F77969ABE1C /* Inter-Thin.ttf */; };
+		337607F329D3610200CC36B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		7699B88040F8A987B510C191 /* libPods-OyVer-OyVerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-OyVer-OyVerTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		8607C53F3D7F40E3BC1B5C03 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 658F8955002F481484D2D5E0 /* Inter-ExtraBold.ttf */; };
-		A790295D893446A593A31E41 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75F4676A9E6C4D8286336147 /* Inter-Black.ttf */; };
-		C77D2409EC1D43BDA63505C1 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 59DA23FAE0384354A22917C6 /* Inter-Light.ttf */; };
-		F8232D041BBC490CA18840CB /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1B54DE84046493F820BD8CA /* Inter-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,17 +279,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				A790295D893446A593A31E41 /* Inter-Black.ttf in Resources */,
-				F8232D041BBC490CA18840CB /* Inter-Bold.ttf in Resources */,
-				8607C53F3D7F40E3BC1B5C03 /* Inter-ExtraBold.ttf in Resources */,
-				26351360548045CBBBA1F236 /* Inter-ExtraLight.ttf in Resources */,
-				C77D2409EC1D43BDA63505C1 /* Inter-Light.ttf in Resources */,
-				437B656F7086483C982775C0 /* Inter-Medium.ttf in Resources */,
-				370349F1DD3D471993D8B2E7 /* Inter-Regular.ttf in Resources */,
-				01FBCF5E08744C72AFD080E1 /* Inter-SemiBold.ttf in Resources */,
-				20450F14D6C542A391881331 /* Inter-Thin.ttf in Resources */,
+				337607F329D3610200CC36B2 /* LaunchScreen.storyboard in Resources */,
+				337607F229D360DD00CC36B2 /* Inter-Thin.ttf in Resources */,
+				337607F129D360D900CC36B2 /* Inter-SemiBold.ttf in Resources */,
+				337607F029D360D300CC36B2 /* Inter-Regular.ttf in Resources */,
+				337607EF29D360CE00CC36B2 /* Inter-Medium.ttf in Resources */,
+				337607EE29D360C900CC36B2 /* Inter-Light.ttf in Resources */,
+				337607ED29D360C400CC36B2 /* Inter-ExtraLight.ttf in Resources */,
+				337607EC29D360BD00CC36B2 /* Inter-ExtraBold.ttf in Resources */,
+				337607EB29D360B800CC36B2 /* Inter-Bold.ttf in Resources */,
+				337607EA29D360B000CC36B2 /* Inter-Black.ttf in Resources */,
+				337607E929D360A100CC36B2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +505,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-OyVer-OyVerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = A2L9VHCSP3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -533,6 +534,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = A2L9VHCSP3;
 				INFOPLIST_FILE = OyVerTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -571,7 +573,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.OyVer;
 				PRODUCT_NAME = OyVer;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -598,7 +600,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.OyVer;
 				PRODUCT_NAME = OyVer;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
