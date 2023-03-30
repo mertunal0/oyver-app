@@ -93,29 +93,9 @@ export default class Register extends Component {
         <ImageBackground blurRadius={Platform.OS === 'ios' ? 90 : 300} style={styles.page} source={require('../../Image/bg.png')}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={styles.title}>İlk defa mı geliyorsun? Hadi başlayalım.</Text>
-                <Text style={styles.subtitle}>Hiçbir bilgi zorunlu değil. İstersen boş bırakabilirsin!</Text>
-                <Text style={[styles.label, styles.label1]}>İsim</Text>
-                <TextInput
-                    style={styles.input}
-                    value={this.state.name}
-                    onChangeText={(text) => this.setState({name: text})}
-                    underlineColorAndroid={'transparent'}
-                />
-                <Text style={[styles.label, styles.label2]}>Soy İsim</Text>
-                <View>
-                    <TextInput
-                        style={styles.input}
-                        value={this.state.surname}
-                        onChangeText={(text) => this.setState({surname: text})}
-                        underlineColorAndroid={'white'}
-                    />
-                </View>
+                
 
-                <TouchableOpacity style={styles.loginButton} onPress={() => this.onRegisterPress()}>
-                    <Text style={styles.loginButtonText}>Başla</Text>
-                </TouchableOpacity>
-
-                <View style={{marginTop: 12, flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{marginTop: 40, flexDirection: 'row', alignItems: 'center'}}>
                     <RadioBox selected={this.state.privacyPolicyAccepted == true } setSelected={() => this.setState({privacyPolicyAccepted: !this.state.privacyPolicyAccepted})} />
                     <Text style={{marginLeft: 4, fontSize: 16, color: "#000", fontFamily: 'Inter-Regular'}}>Oy Ver </Text>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate("PrivacyPolicy")}>
@@ -123,6 +103,10 @@ export default class Register extends Component {
                     </TouchableOpacity>
                     <Text style={{fontSize: 16, color: "#000", fontFamily: 'Inter-Regular'}}>'nı onaylıyorum.</Text>
                 </View>
+
+                <TouchableOpacity style={styles.loginButton} onPress={() => this.onRegisterPress()}>
+                    <Text style={styles.loginButtonText}>Başla</Text>
+                </TouchableOpacity>
 
             </ScrollView>
 
@@ -188,7 +172,7 @@ const styles = StyleSheet.create({
         color: '#000',
     },
     loginButton: {
-        marginTop: 100,
+        marginTop: 20,
         alignSelf: 'stretch',
         backgroundColor: '#8b5e34',
         height: 60,
