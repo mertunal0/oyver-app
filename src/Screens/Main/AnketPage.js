@@ -120,7 +120,7 @@ export default class AnketPage extends Component {
                         keyExtractor={item => item.Id}
                         renderItem={({ item }) => (
                             <>
-                                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 16}}>
+                                <TouchableOpacity onPress={() => {if(this.state.oyVerildi == false) this.setState({seciliSikId: item.Id})}} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 16}}>
                                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                         {item.Fotograf && (<Image style={{width: 40, height: 40, marginRight: 12}} source={{uri: item.Fotograf}}/> )}
                                         <Text style={styles.sikText}>{item.Text}</Text>
@@ -129,7 +129,7 @@ export default class AnketPage extends Component {
                                     {this.state.oyVerildi == false && (
                                         <RadioBox selected={this.state.seciliSikId == item.Id } setSelected={() => this.setState({seciliSikId: item.Id})} />
                                     )}
-                                </View>
+                                </TouchableOpacity>
                                 {this.state.oyVerildi && (
                                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                         <View style={{flexDirection: 'row', width: '80%', height: 15, alignItems: 'center', marginTop: 8}}>

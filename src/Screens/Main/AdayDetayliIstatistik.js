@@ -71,8 +71,8 @@ export default class AdayDetayliIstatistik extends Component {
     {
         var yuzde_text = "";
 
-        if( (yuzde >= 0 && yuzde <  0.01)  || 
-            (yuzde <= 0 && yuzde > -0.01)  )
+        if( (yuzde >= 0 && yuzde <  0.001)  || 
+            (yuzde <= 0 && yuzde > -0.001)  )
         {
             yuzde_text = "%0"
         }
@@ -80,8 +80,8 @@ export default class AdayDetayliIstatistik extends Component {
         {
             yuzde_text = (yuzde*100).toFixed(2)
 
-            if(yuzde < 0)   yuzde_text = "%"+"-"+yuzde_text;
-            else            yuzde_text =     "%"+yuzde_text;
+            if(yuzde < 0)   yuzde_text = "%"+yuzde_text;
+            else            yuzde_text = "%"+yuzde_text;
         }
 
         return yuzde_text;
@@ -125,11 +125,11 @@ export default class AdayDetayliIstatistik extends Component {
                                         <Text style={{fontFamily: "Inter-ExtraBold", color: "#fff"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.MevcutOyYuzdesi)}</Text>
                                     </View>
                                     <View style={styles.oyYuzdeSubView2}>
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde <  -0.01  && (<Entypo size={18} name="triangle-down" color={"#f00"}/>)}
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde >   0.01  && (<Entypo size={18} name="triangle-up" color={"#009900"}/>)}
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde <=  0.01  &&
-                                        this.state.adayDetayliIstatistik.DegisimYuzde >=  -0.01 && (<Ionicons size={18} name="remove-outline" color={"#333"}/>)}
-                                        <Text style={{fontFamily: "Inter-ExtraBold", color: this.state.adayDetayliIstatistik.DegisimYuzde > 0.01 ? "#009900" : this.state.adayDetayliIstatistik.DegisimYuzde < -0.01 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.DegisimYuzde)}</Text>
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde <  -0.001  && (<Entypo size={18} name="triangle-down" color={"#f00"}/>)}
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde >   0.001  && (<Entypo size={18} name="triangle-up" color={"#009900"}/>)}
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde <=  0.001  &&
+                                        this.state.adayDetayliIstatistik.DegisimYuzde >=  -0.001 && (<Ionicons size={18} name="remove-outline" color={"#333"}/>)}
+                                        <Text style={{fontFamily: "Inter-ExtraBold", color: this.state.adayDetayliIstatistik.DegisimYuzde > 0.001 ? "#009900" : this.state.adayDetayliIstatistik.DegisimYuzde < -0.001 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.DegisimYuzde)}</Text>
                                     </View>
                                 </View>
                             </View>

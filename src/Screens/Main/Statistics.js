@@ -68,8 +68,8 @@ export default class Statistics extends Component {
     {
         var yuzde_text = "";
 
-        if( (yuzde >= 0 && yuzde <  0.01)  || 
-            (yuzde <= 0 && yuzde > -0.01)  )
+        if( (yuzde >= 0 && yuzde <  0.001)  || 
+            (yuzde <= 0 && yuzde > -0.001)  )
         {
             yuzde_text = "%0"
         }
@@ -77,8 +77,8 @@ export default class Statistics extends Component {
         {
             yuzde_text = (yuzde*100).toFixed(2)
 
-            if(yuzde < 0)   yuzde_text = "%"+"-"+yuzde_text;
-            else            yuzde_text =     "%"+yuzde_text;
+            if(yuzde < 0)   yuzde_text = "%"+yuzde_text;
+            else            yuzde_text = "%"+yuzde_text;
         }
 
         return yuzde_text;
@@ -124,7 +124,7 @@ export default class Statistics extends Component {
                                 if (e.nativeEvent.contentOffset.y > e.nativeEvent.contentSize.height - 1200) {this.onEndReached(); }
                             }}
                             style={{
-                                paddingHorizontal: 15,
+                                paddingHorizontal: 8,
                                 backgroundColor: 'transparent',
                                 height: window.height - 170
                             }}
@@ -145,11 +145,11 @@ export default class Statistics extends Component {
                                         )}
                                     </View>
                                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', flex: 22}}>
-                                        { item.DegisimYuzde < -0.01 && (<Entypo size={24} name="triangle-down" color={"#f00"}/>)}
-                                        { item.DegisimYuzde > 0.01 && (<Entypo size={24} name="triangle-up" color={"#009900"}/>)}
-                                        { item.DegisimYuzde <= 0.01  &&
-                                        item.DegisimYuzde >= -0.01 && (<Ionicons size={24} name="remove-outline" color={"#333"}/>)}
-                                        <Text style={{color: item.DegisimYuzde > 0.01 ? "#009900" : item.DegisimYuzde < -0.01 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
+                                        { item.DegisimYuzde < -0.001 && (<Entypo size={24} name="triangle-down" color={"#f00"}/>)}
+                                        { item.DegisimYuzde > 0.001 && (<Entypo size={24} name="triangle-up" color={"#009900"}/>)}
+                                        { item.DegisimYuzde <= 0.001  &&
+                                        item.DegisimYuzde >= -0.001 && (<Ionicons size={24} name="remove-outline" color={"#333"}/>)}
+                                        <Text style={{color: item.DegisimYuzde > 0.001 ? "#009900" : item.DegisimYuzde < -0.001 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
                                     </View>
                                     <View style={{justifyContent: 'center', alignItems: 'flex-end', flex: 5}}>
                                         <Octicons name='chevron-right' size={24} color={'#8b5e34'} />
@@ -168,11 +168,11 @@ export default class Statistics extends Component {
                                         { !this.state.loading && (
                                             <View style={styles.subView1}>
                                                 <PieChart
-                                                    widthAndHeight={140}
+                                                    widthAndHeight={window.width / 3}
                                                     series={this.state.aktifChartElemanlari}
                                                     sliceColor={this.state.aktifRenkler}
                                                 />
-                                                <View>
+                                                <View style={{width: 2*window.width / 3 - 18}}>
                                                     { this.state.detailedDurumList.map((item, idx) => (
                                                         <View style={styles.subView2} key={idx}>
                                                             <Text style={styles.adayIsmiText}>{item.Isim}</Text>
