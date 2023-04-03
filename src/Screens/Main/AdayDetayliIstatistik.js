@@ -10,8 +10,11 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { BarChart } from 'react-native-gifted-charts';
 import AntIcons from 'react-native-vector-icons/AntDesign'
-import { BannerAdSize, BannerAd, TestIds } from 'react-native-google-mobile-ads';
+import { BannerAdSize, BannerAd, TestIds, InterstitialAd } from 'react-native-google-mobile-ads';
+import AsyncBus from '../../Util/AsyncBus';
+import { Linking } from 'react-native/Libraries/Linking/Linking';
 
+const SEKIZ_SAAT_2_MS = 8*60*60*1000;
 
 const window = Dimensions.get('window');
 
@@ -31,8 +34,31 @@ export default class AdayDetayliIstatistik extends Component {
         };
     }
 
+    gecisReklamiYoneticisi = () => 
+    {
+        AsyncBus.GetLocalStorage("InterstitialAdTime").then((adTimeMs) => {
+            if(Date.now() - adTimeMs > SEKIZ_SAAT_2_MS)
+            {
+                const interstitial = InterstitialAd.createForAdRequest(Platform.OS === "ios" ? "ca-app-pub-7764130368146320/3874563534" : "ca-app-pub-7764130368146320/3276593898", {});
+                setTimeout( () => {
+                    interstitial.load();
+                    console.log(1)
+                }, 10000)
+                
+                if(interstitial.loaded)
+                {
+                    interstitial.show();
+                    
+                    AsyncBus.SetLocalStorage("InterstitialAdTime", Date.now())
+                }
+            }
+        })
+    }
+
     componentDidMount = () => 
     {
+        this.gecisReklamiYoneticisi();
+
         Services.generalServicePrivate("/Users/GetAdayDetayliIstatistik", {SecimId: this.state.secimId, AdaylikId: this.state.adaylikId})
         .then(res => {
             if(res)
@@ -106,7 +132,10 @@ export default class AdayDetayliIstatistik extends Component {
 
                 <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                     <ScrollView style={{paddingHorizontal: 15, height: window.height - 100}} showsVerticalScrollIndicator={false}>
-                        <Text style={styles.title}>Aday Profili</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+                            <Text style={styles.title}>Aday Profili</Text>
+                            <AntIcons name='instagram' size={24} color="#C13584" onPress={() => {this.props.navigation.navigate("WebView", {url: 'https://www.instagram.com/oyverapp/'})}} />
+                        </View>
 
                         <View style={styles.ustProfilView} >
                             <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 30}}>
@@ -149,7 +178,8 @@ export default class AdayDetayliIstatistik extends Component {
                             />
                         </View>
 
-                        <Text style={styles.title}>Bugünkü Rekabet Performansı</Text>
+                        <Text style={[styles.title, {marginTop: 20}]}>Bugünkü Rekabet Performansı</Text>
+                        
                         <View>
                             {this.state.adayDetayliIstatistik?.Rakipler?.map((item, idx) => (
                                 <View key={idx} style={styles.subItemView}>
@@ -242,7 +272,6 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'ios' ? 40 : 0,
     },
     title: {
-        marginTop: 20,
         marginBottom: 8,
         fontSize: 18,
         fontFamily: 'Inter-SemiBold',
