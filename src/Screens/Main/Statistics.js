@@ -68,8 +68,8 @@ export default class Statistics extends Component {
     {
         var yuzde_text = "";
 
-        if( (yuzde >= 0 && yuzde <  0.001)  || 
-            (yuzde <= 0 && yuzde > -0.001)  )
+        if( (yuzde >= 0 && yuzde <  0.0001)  || 
+            (yuzde <= 0 && yuzde > -0.0001)  )
         {
             yuzde_text = "%0"
         }
@@ -145,11 +145,11 @@ export default class Statistics extends Component {
                                         )}
                                     </View>
                                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', flex: 22}}>
-                                        { item.DegisimYuzde < -0.001 && (<Entypo size={24} name="triangle-down" color={"#f00"}/>)}
-                                        { item.DegisimYuzde > 0.001 && (<Entypo size={24} name="triangle-up" color={"#009900"}/>)}
-                                        { item.DegisimYuzde <= 0.001  &&
-                                        item.DegisimYuzde >= -0.001 && (<Ionicons size={24} name="remove-outline" color={"#333"}/>)}
-                                        <Text style={{color: item.DegisimYuzde > 0.001 ? "#009900" : item.DegisimYuzde < -0.001 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
+                                        { item.DegisimYuzde < -0.0001 && (<Entypo size={24} name="triangle-down" color={"#f00"}/>)}
+                                        { item.DegisimYuzde > 0.0001 && (<Entypo size={24} name="triangle-up" color={"#009900"}/>)}
+                                        { item.DegisimYuzde <= 0.0001  &&
+                                        item.DegisimYuzde >= -0.0001 && (<Ionicons size={24} name="remove-outline" color={"#333"}/>)}
+                                        <Text style={{color: item.DegisimYuzde > 0.0001 ? "#009900" : item.DegisimYuzde < -0.0001 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(item.DegisimYuzde)}</Text>
                                     </View>
                                     <View style={{justifyContent: 'center', alignItems: 'flex-end', flex: 5}}>
                                         <Octicons name='chevron-right' size={24} color={'#8b5e34'} />

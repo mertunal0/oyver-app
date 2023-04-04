@@ -10,7 +10,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { BarChart } from 'react-native-gifted-charts';
 import AntIcons from 'react-native-vector-icons/AntDesign'
-import { BannerAdSize, BannerAd, TestIds, InterstitialAd } from 'react-native-google-mobile-ads';
+import { BannerAdSize, BannerAd, TestIds, InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
 import AsyncBus from '../../Util/AsyncBus';
 import { Linking } from 'react-native/Libraries/Linking/Linking';
 
@@ -36,21 +36,25 @@ export default class AdayDetayliIstatistik extends Component {
 
     gecisReklamiYoneticisi = () => 
     {
+        const id = __DEV__ ? TestIds.INTERSTITIAL : Platform.OS === "ios" ? "ca-app-pub-7764130368146320/3874563534" : "ca-app-pub-7764130368146320/3276593898"
+        let unsub  = ""
+
         AsyncBus.GetLocalStorage("InterstitialAdTime").then((adTimeMs) => {
+
             if(Date.now() - adTimeMs > SEKIZ_SAAT_2_MS)
             {
-                const interstitial = InterstitialAd.createForAdRequest(Platform.OS === "ios" ? "ca-app-pub-7764130368146320/3874563534" : "ca-app-pub-7764130368146320/3276593898", {});
-                setTimeout( () => {
-                    interstitial.load();
-                    console.log(1)
-                }, 10000)
-                
-                if(interstitial.loaded)
-                {
+                const interstitial = InterstitialAd.createForAdRequest(id, {
+                    requestNonPersonalizedAdsOnly: true,
+                    keywords: ['fashion', 'clothing'],
+                });
+
+                unsub = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+                    console.log("reklam gosterildi")
                     interstitial.show();
-                    
-                    AsyncBus.SetLocalStorage("InterstitialAdTime", Date.now())
-                }
+                    AsyncBus.SetLocalStorage("InterstitialAdTime", Date.now().toString())
+                });
+
+                interstitial.load();
             }
         })
     }
@@ -97,8 +101,8 @@ export default class AdayDetayliIstatistik extends Component {
     {
         var yuzde_text = "";
 
-        if( (yuzde >= 0 && yuzde <  0.001)  || 
-            (yuzde <= 0 && yuzde > -0.001)  )
+        if( (yuzde >= 0 && yuzde <  0.0001)  || 
+            (yuzde <= 0 && yuzde > -0.0001)  )
         {
             yuzde_text = "%0"
         }
@@ -154,11 +158,11 @@ export default class AdayDetayliIstatistik extends Component {
                                         <Text style={{fontFamily: "Inter-ExtraBold", color: "#fff"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.MevcutOyYuzdesi)}</Text>
                                     </View>
                                     <View style={styles.oyYuzdeSubView2}>
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde <  -0.001  && (<Entypo size={18} name="triangle-down" color={"#f00"}/>)}
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde >   0.001  && (<Entypo size={18} name="triangle-up" color={"#009900"}/>)}
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde <=  0.001  &&
-                                        this.state.adayDetayliIstatistik.DegisimYuzde >=  -0.001 && (<Ionicons size={18} name="remove-outline" color={"#333"}/>)}
-                                        <Text style={{fontFamily: "Inter-ExtraBold", color: this.state.adayDetayliIstatistik.DegisimYuzde > 0.001 ? "#009900" : this.state.adayDetayliIstatistik.DegisimYuzde < -0.001 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.DegisimYuzde)}</Text>
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde <  -0.0001  && (<Entypo size={18} name="triangle-down" color={"#f00"}/>)}
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde >   0.0001  && (<Entypo size={18} name="triangle-up" color={"#009900"}/>)}
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde <=  0.0001  &&
+                                        this.state.adayDetayliIstatistik.DegisimYuzde >=  -0.0001 && (<Ionicons size={18} name="remove-outline" color={"#333"}/>)}
+                                        <Text style={{fontFamily: "Inter-ExtraBold", color: this.state.adayDetayliIstatistik.DegisimYuzde > 0.0001 ? "#009900" : this.state.adayDetayliIstatistik.DegisimYuzde < -0.0001 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.DegisimYuzde)}</Text>
                                     </View>
                                 </View>
                             </View>
