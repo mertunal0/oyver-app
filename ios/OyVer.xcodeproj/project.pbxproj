@@ -11,6 +11,7 @@
 		0C80B921A6F3F58F76C31292 /* libPods-OyVer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-OyVer.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		336ECAE829DE22A800A17639 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 336ECAE729DE22A700A17639 /* GoogleService-Info.plist */; };
 		337607E929D360A100CC36B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		337607EA29D360B000CC36B2 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75F4676A9E6C4D8286336147 /* Inter-Black.ttf */; };
 		337607EB29D360B800CC36B2 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1B54DE84046493F820BD8CA /* Inter-Bold.ttf */; };
@@ -49,6 +50,7 @@
 		16AE67FCC6814ADAB370A0A5 /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraLight.ttf"; path = "../src/assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-OyVer-OyVerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OyVer-OyVerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32C4228F56B94ADB99343DB0 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
+		336ECAE729DE22A700A17639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "OyVer/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-OyVer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OyVer.debug.xcconfig"; path = "Target Support Files/Pods-OyVer/Pods-OyVer.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-OyVer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OyVer.release.xcconfig"; path = "Target Support Files/Pods-OyVer/Pods-OyVer.release.xcconfig"; sourceTree = "<group>"; };
 		59DA23FAE0384354A22917C6 /* Inter-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Light.ttf"; path = "../src/assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		13B07FAE1A68108700A75B9A /* OyVer */ = {
 			isa = PBXGroup;
 			children = (
+				336ECAE729DE22A700A17639 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -284,6 +287,7 @@
 				337607F129D360D900CC36B2 /* Inter-SemiBold.ttf in Resources */,
 				337607F029D360D300CC36B2 /* Inter-Regular.ttf in Resources */,
 				337607EF29D360CE00CC36B2 /* Inter-Medium.ttf in Resources */,
+				336ECAE829DE22A800A17639 /* GoogleService-Info.plist in Resources */,
 				337607EE29D360C900CC36B2 /* Inter-Light.ttf in Resources */,
 				337607ED29D360C400CC36B2 /* Inter-ExtraLight.ttf in Resources */,
 				337607EC29D360BD00CC36B2 /* Inter-ExtraBold.ttf in Resources */,
@@ -559,7 +563,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3.1;
+				CURRENT_PROJECT_VERSION = 4.1;
 				DEVELOPMENT_TEAM = A2L9VHCSP3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OyVer/Info.plist;
@@ -567,7 +571,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -587,14 +591,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3.1;
+				CURRENT_PROJECT_VERSION = 4.1;
 				DEVELOPMENT_TEAM = A2L9VHCSP3;
 				INFOPLIST_FILE = OyVer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
