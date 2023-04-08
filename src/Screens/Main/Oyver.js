@@ -8,6 +8,7 @@ import RadioBox from '../../Components/RadioBox';
 import Services from "../../Util/Service";
 import TopBar from '../../Components/TopBar';
 import { CommonActions } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const window = Dimensions.get('window');
 
@@ -16,6 +17,7 @@ export default class OyVer extends Component {
         super(props);
         this.state = {
             loading: true,
+            oyverPerm: true,
             secimId: global.seciliSecimId,
 
             seciliAdayId: -1,
@@ -51,14 +53,16 @@ export default class OyVer extends Component {
     }
 
     oyuGonder = () => {
-        if( 0 < this.state.seciliAdayId)
+        if( 0    <  this.state.seciliAdayId && 
+            true == this.state.oyverPerm     )
         {
+            this.setState({oyverPerm: false})
             Services.generalServicePrivate("/Users/OyunuDegistir", {SecimId: this.state.secimId, VerilenOyId: -1, OncekiAdayId: -1, YeniAdayId: this.state.seciliAdayId})
             .then(res => {
                 if(res.Response == 2)
                 {
                     this.sonOyuCek()
-                    this.setState({showOyVerildiAlert: true})
+                    this.setState({showOyVerildiAlert: true, oyverPerm: true})
                 }
             })
         }
@@ -66,14 +70,16 @@ export default class OyVer extends Component {
 
     oyuDegistir = () => {
         //!< Karar degistiyse
-        if ( this.state.seciliAdayId != this.state.userSonOy.SeciliAdayId)
+        if ( this.state.seciliAdayId != this.state.userSonOy.SeciliAdayId && 
+             true                    == this.state.oyverPerm               )
         {
+            this.setState({oyverPerm: false})
             Services.generalServicePrivate("/Users/OyunuDegistir", {SecimId: this.state.secimId, VerilenOyId: this.state.userSonOy.VerilenOyId, OncekiAdayId: this.state.userSonOy.SeciliAdayId, YeniAdayId: this.state.seciliAdayId})
             .then(res => {
                 if(res.Response == 2)
                 {
                     this.sonOyuCek();
-                    this.setState({showOyVerildiAlert: true}, () => global.seciliSecimIcinOyVerilmis = true)
+                    this.setState({showOyVerildiAlert: true, oyverPerm: true}, () => global.seciliSecimIcinOyVerilmis = true)
                 }
             })
         }
@@ -155,12 +161,20 @@ export default class OyVer extends Component {
                         
                         { false == this.state.userSonOy?.OyVerilmis && (
                             <TouchableOpacity onPress={() => this.oyuGonder()} style={styles.saveBtn}>
+                                {this.state.oyverPerm ? 
                                 <Text style={styles.saveText}>Oyunu Gönder</Text>
+                                :
+                                <Ionicons size={28} color={"#fff"} name='ios-refresh'/>
+                                }
                             </TouchableOpacity>
                         )}
                         { true == this.state.userSonOy?.OyVerilmis && (
                             <TouchableOpacity onPress={() => this.oyuDegistir()} style={styles.saveBtn}>
+                                {this.state.oyverPerm ? 
                                 <Text style={styles.saveText}>Oyunu Değiştir</Text>
+                                :
+                                <Ionicons size={28} color={"#fff"} name='ios-refresh'/>
+                                }
                             </TouchableOpacity>
                         )}
 
