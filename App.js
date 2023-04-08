@@ -9,6 +9,7 @@ import Splash from './src/Screens/Splash/SplashScreen';
 import AsyncBus from './src/Util/AsyncBus';
 import OyverRouter from './src/Screens/Main/OyverRouter';
 import SecimSecimi from './src/Screens/SecimSecimi/SecimSecimi'
+import {requestUserPermission} from './src/Util/NotificationService'
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,11 @@ export default class App extends Component
         super(props);
         this.state = {
         };
+    }
+
+    componentDidMount = () => 
+    {
+        requestUserPermission();
     }
 
     render() {

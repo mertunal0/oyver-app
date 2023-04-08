@@ -118,6 +118,9 @@ export default class Timeline extends Component {
                                 </View>
                             </>
                         )}
+                        ListFooterComponent={(
+                            <View style={{height: Platform.OS === 'ios' ? 100 : 50}} />
+                        )}
                     />
                 </ImageBackground>
             </View>

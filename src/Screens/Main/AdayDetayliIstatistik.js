@@ -10,8 +10,11 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { BarChart } from 'react-native-gifted-charts';
 import AntIcons from 'react-native-vector-icons/AntDesign'
-import { BannerAdSize, BannerAd, TestIds } from 'react-native-google-mobile-ads';
+import { BannerAdSize, BannerAd, TestIds, InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
+import AsyncBus from '../../Util/AsyncBus';
+import { Linking } from 'react-native/Libraries/Linking/Linking';
 
+const SEKIZ_SAAT_2_MS = 8*60*60*1000;
 
 const window = Dimensions.get('window');
 
@@ -31,8 +34,35 @@ export default class AdayDetayliIstatistik extends Component {
         };
     }
 
+    gecisReklamiYoneticisi = () => 
+    {
+        const id = __DEV__ ? TestIds.INTERSTITIAL : Platform.OS === "ios" ? "ca-app-pub-7764130368146320/3874563534" : "ca-app-pub-7764130368146320/3276593898"
+        let unsub  = ""
+
+        AsyncBus.GetLocalStorage("InterstitialAdTime").then((adTimeMs) => {
+
+            if(Date.now() - adTimeMs > SEKIZ_SAAT_2_MS)
+            {
+                const interstitial = InterstitialAd.createForAdRequest(id, {
+                    requestNonPersonalizedAdsOnly: true,
+                    keywords: ['fashion', 'clothing'],
+                });
+
+                unsub = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+                    console.log("reklam gosterildi")
+                    interstitial.show();
+                    AsyncBus.SetLocalStorage("InterstitialAdTime", Date.now().toString())
+                });
+
+                interstitial.load();
+            }
+        })
+    }
+
     componentDidMount = () => 
     {
+        this.gecisReklamiYoneticisi();
+
         Services.generalServicePrivate("/Users/GetAdayDetayliIstatistik", {SecimId: this.state.secimId, AdaylikId: this.state.adaylikId})
         .then(res => {
             if(res)
@@ -71,8 +101,8 @@ export default class AdayDetayliIstatistik extends Component {
     {
         var yuzde_text = "";
 
-        if( (yuzde >= 0 && yuzde <  0.01)  || 
-            (yuzde <= 0 && yuzde > -0.01)  )
+        if( (yuzde >= 0 && yuzde <  0.0001)  || 
+            (yuzde <= 0 && yuzde > -0.0001)  )
         {
             yuzde_text = "%0"
         }
@@ -80,8 +110,8 @@ export default class AdayDetayliIstatistik extends Component {
         {
             yuzde_text = (yuzde*100).toFixed(2)
 
-            if(yuzde < 0)   yuzde_text = "%"+"-"+yuzde_text;
-            else            yuzde_text =     "%"+yuzde_text;
+            if(yuzde < 0)   yuzde_text = "%"+yuzde_text;
+            else            yuzde_text = "%"+yuzde_text;
         }
 
         return yuzde_text;
@@ -106,7 +136,10 @@ export default class AdayDetayliIstatistik extends Component {
 
                 <ImageBackground source={require("../../Image/bg.png")} blurRadius={Platform.OS === 'ios' ? 90 : 300} resizeMode="stretch" style={{flexDirection:"row", width:"100%", height: "100%"}}>
                     <ScrollView style={{paddingHorizontal: 15, height: window.height - 100}} showsVerticalScrollIndicator={false}>
-                        <Text style={styles.title}>Aday Profili</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+                            <Text style={styles.title}>Aday Profili</Text>
+                            <AntIcons name='instagram' size={24} color="#C13584" onPress={() => {this.props.navigation.navigate("WebView", {url: 'https://www.instagram.com/oyverapp/'})}} />
+                        </View>
 
                         <View style={styles.ustProfilView} >
                             <View style={{justifyContent: 'center', alignItems: 'flex-start', flex: 30}}>
@@ -125,11 +158,11 @@ export default class AdayDetayliIstatistik extends Component {
                                         <Text style={{fontFamily: "Inter-ExtraBold", color: "#fff"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.MevcutOyYuzdesi)}</Text>
                                     </View>
                                     <View style={styles.oyYuzdeSubView2}>
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde <  -0.01  && (<Entypo size={18} name="triangle-down" color={"#f00"}/>)}
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde >   0.01  && (<Entypo size={18} name="triangle-up" color={"#009900"}/>)}
-                                        { this.state.adayDetayliIstatistik.DegisimYuzde <=  0.01  &&
-                                        this.state.adayDetayliIstatistik.DegisimYuzde >=  -0.01 && (<Ionicons size={18} name="remove-outline" color={"#333"}/>)}
-                                        <Text style={{fontFamily: "Inter-ExtraBold", color: this.state.adayDetayliIstatistik.DegisimYuzde > 0.01 ? "#009900" : this.state.adayDetayliIstatistik.DegisimYuzde < -0.01 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.DegisimYuzde)}</Text>
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde <  -0.0001  && (<Entypo size={18} name="triangle-down" color={"#f00"}/>)}
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde >   0.0001  && (<Entypo size={18} name="triangle-up" color={"#009900"}/>)}
+                                        { this.state.adayDetayliIstatistik.DegisimYuzde <=  0.0001  &&
+                                        this.state.adayDetayliIstatistik.DegisimYuzde >=  -0.0001 && (<Ionicons size={18} name="remove-outline" color={"#333"}/>)}
+                                        <Text style={{fontFamily: "Inter-ExtraBold", color: this.state.adayDetayliIstatistik.DegisimYuzde > 0.0001 ? "#009900" : this.state.adayDetayliIstatistik.DegisimYuzde < -0.0001 ? "#f00" : "#333"}}>{this.DegisimYuzdeTextOlustur(this.state.adayDetayliIstatistik.DegisimYuzde)}</Text>
                                     </View>
                                 </View>
                             </View>
@@ -149,7 +182,8 @@ export default class AdayDetayliIstatistik extends Component {
                             />
                         </View>
 
-                        <Text style={styles.title}>Bugünkü Rekabet Performansı</Text>
+                        <Text style={[styles.title, {marginTop: 20}]}>Bugünkü Rekabet Performansı</Text>
+                        
                         <View>
                             {this.state.adayDetayliIstatistik?.Rakipler?.map((item, idx) => (
                                 <View key={idx} style={styles.subItemView}>
@@ -242,7 +276,6 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'ios' ? 40 : 0,
     },
     title: {
-        marginTop: 20,
         marginBottom: 8,
         fontSize: 18,
         fontFamily: 'Inter-SemiBold',

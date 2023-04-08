@@ -5,6 +5,8 @@ pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.
 
 pod 'ReactNativeART', :path => '../node_modules/@react-native-community/art'
 
+pod 'Firebase/Analytics'
+
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 

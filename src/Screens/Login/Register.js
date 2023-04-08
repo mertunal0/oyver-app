@@ -9,6 +9,7 @@ import Services from "../../Util/Service";
 import RadioBox from '../../Components/RadioBox';
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const window = Dimensions.get('window');
 
@@ -24,6 +25,8 @@ export default class Register extends Component {
 
             privacyPolicyAccepted: false,
             showPolicyAlert: false,
+
+            isLoading: false,
         };
     }
 
@@ -34,11 +37,17 @@ export default class Register extends Component {
             this.setState({showPolicyAlert: true})
             return
         }
+        if(true == this.state.isLoading)
+        {
+            return
+        }
+
+        this.setState({isLoading: true})
 
         DeviceInfo.getUniqueId().then(deviceId => {
             Services.generalServicePrivate("/Users/TokenControl", {EmailAddress: deviceId}).then((res) => {
                 if (res?.UserId > 0) {
-                    this.setState({isLogin: 1});
+                    this.setState({isLogin: 1, isLoading: false});
                     AsyncBus.SetLocalStorage("UserId", res.UserId.toString());
 
                     //!< Daha onceden secilen bir secim id'si var mi?
@@ -66,6 +75,7 @@ export default class Register extends Component {
                 else
                 {
                     Services.generalService("/Users/NewUser", { Name: this.state.name, Surname: this.state.surname, DeviceId: deviceId}).then((res) => {
+                        this.setState({isLoading: false});
                         if (res.UserId > 0) {
                             AsyncBus.SetLocalStorage("IsLogin","1");
                             AsyncBus.SetLocalStorage("IsIntro","1");
@@ -105,7 +115,12 @@ export default class Register extends Component {
                 </View>
 
                 <TouchableOpacity style={styles.loginButton} onPress={() => this.onRegisterPress()}>
-                    <Text style={styles.loginButtonText}>Başla</Text>
+                    {!this.state.isLoading ? 
+                        <Text style={styles.loginButtonText}>Başla</Text>
+                        :
+                        <Ionicons size={28} color={"#fff"} name='ios-refresh'/>
+                    }
+                    
                 </TouchableOpacity>
 
             </ScrollView>

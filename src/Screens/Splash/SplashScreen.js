@@ -86,7 +86,7 @@ export default class Splash extends Component {
 
     render() {
         return (
-            <View style={{backgroundColor:'#f00',width:window.width,height:window.height}}>
+            <View style={{backgroundColor:'transparent',width:window.width,height:window.height}}>
                 <Image style={{width: "100%", height: "100%", resizeMode: "stretch"}} source={require('../../Image/splash.png')}/>
             </View>
             )
